@@ -6,6 +6,6 @@ public interface TaskService<T> {
 
     void updateTaskStatus(Long taskId, TypeOfTask task);
 
-    T getTask(Long id);
+    T getTaskById(Long id);
 
 }

@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,13 +25,17 @@ import javax.persistence.Table;
 public class Mechanic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "middle_name")
     private String middleName;
     @OneToMany
     @JoinTable(name = "mechanics_orders",
-            joinColumns = @JoinColumn(name = "mechanic_id"),
+            joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
     List<Order> orders;
 }

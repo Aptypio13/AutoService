@@ -15,4 +15,10 @@ public class CarOwnerServiceImpl implements CarOwnerService<CarOwner> {
     public void add(CarOwner carOwner) {
         carOwnerRepository.save(carOwner);
     }
+
+    @Override
+    public CarOwner getById(Long id) {
+        return carOwnerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No such owner with id: " + id));
+    }
 }

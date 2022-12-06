@@ -21,13 +21,13 @@ public class TaskServiceImpl implements TaskService<Task> {
 
     @Override
     public void updateTaskStatus(Long taskId, TypeOfTask taskType) {
-        Task task = getTask(taskId);
+        Task task = getTaskById(taskId);
         task.setTypeOfTask(taskType);
         add(task);
     }
 
     @Override
-    public Task getTask(Long id) {
+    public Task getTaskById(Long id) {
         return taskRepository
                 .findById(id)
                 .orElseThrow(

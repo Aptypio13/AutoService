@@ -15,4 +15,10 @@ public class CarServiceImpl implements CarService<Car> {
     public void add(Car car) {
         carCarRepository.save(car);
     }
+
+    @Override
+    public Car getById(Long id) {
+        return carCarRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No such car with id: " + id));
+    }
 }

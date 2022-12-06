@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,25 +30,32 @@ import java.time.LocalDate;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false, unique=true)
     private Long id;
     @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
+    @Column(name = "description_of_problem")
     private String descriptionOfProblem;
+    @Column(name = "date_of_application")
     private LocalDate dateOfApplication;
+    @Column(name = "date_of_completion")
     private LocalDate dateOfCompletion;
 
     @OneToMany
     @JoinTable(name = "order_task",
-            joinColumns = @JoinColumn(name = "order_id"),
+            joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "task_id"))
     private List<Task> tasks;
     @OneToMany
     @JoinTable(name = "order_products",
-            joinColumns = @JoinColumn(name = "order_id"),
+            joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
     @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
+    @Column(name = "total_cost")
     private Double totalCost;
 
 }

@@ -7,6 +7,6 @@ import lombok.Data;
 
 @Data
 public class CarOwnerRequestDto {
-    private List<Car> cars;
-    private List<Order> orders;
+    private List<Long> carsId;
+    private List<Long> ordersId;
 }

@@ -10,5 +10,5 @@ public class CarRequestDto {
     private String model;
     private LocalDate yearOfManufacture;
     private String number;
-    private CarOwner owner;
+    private Long ownerId;
 }
