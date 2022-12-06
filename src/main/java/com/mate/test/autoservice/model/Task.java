@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,6 +26,7 @@ import javax.persistence.Table;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false, unique=true)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -31,9 +34,12 @@ public class Task {
     @OneToOne
     @JoinColumn(name = "mechanic_id")
     private Mechanic mechanic;
+    @Column(name = "price")
     private Double price;
     @Enumerated(EnumType.STRING)
+    @Column(name = "type_of_task")
     private TypeOfTask typeOfTask;
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status")
     private PaymentStatus paymentStatus;
 }

@@ -19,13 +19,13 @@ public class CarController {
     private final RequestMapper<Car, CarRequestDto> requestMapper;
 
     @PostMapping("/add")
-    private void createCar(@RequestBody CarRequestDto car) {
+    public void createCar(@RequestBody CarRequestDto car) {
         carService.add(requestMapper.toModel(car));
     }
+
 
     @PutMapping("/update")
-    private void updateCar(@RequestBody CarRequestDto car) {
+    public void updateCar(@RequestBody CarRequestDto car) {
         carService.add(requestMapper.toModel(car));
     }
-
 }

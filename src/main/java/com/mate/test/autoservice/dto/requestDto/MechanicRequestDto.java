@@ -9,5 +9,5 @@ public class MechanicRequestDto {
     private String firstName;
     private String lastName;
     private String middleName;
-    private List<Order> orders;
+    private List<Long> finishedOrdersId;
 }
