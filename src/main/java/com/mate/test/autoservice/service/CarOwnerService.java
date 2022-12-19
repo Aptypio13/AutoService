@@ -1,7 +1,8 @@
 package com.mate.test.autoservice.service;
 
-import com.mate.test.autoservice.model.CarOwner;
 public interface CarOwnerService<T> {
-    void add(T t);
+    T add(T entity);
     T getById(Long id);
+
+    T update(Long id, T entity);
 }

@@ -1,7 +1,7 @@
 package com.mate.test.autoservice.service;
 
+import com.mate.test.autoservice.model.Order;
 import com.mate.test.autoservice.model.OrderStatus;
-import com.mate.test.autoservice.model.Product;
 
 import java.util.List;
 public interface OrderService<T> {
@@ -9,12 +9,14 @@ public interface OrderService<T> {
 
     Double getTotalCostById(Long id);
 
-    void add(T t);
+    T add(T entity);
 
-    void addProduct(Product product, Long id);
+    Order addProduct(Long orderId, Long productId);
 
-    T getOrderById(Long id);
+    T getById(Long id);
 
-    void updateOrderStatus(Long orderId, OrderStatus status);
+    T updateOrderStatus(Long orderId, OrderStatus status);
+
+    T update(Long id, T entity);
 }
 

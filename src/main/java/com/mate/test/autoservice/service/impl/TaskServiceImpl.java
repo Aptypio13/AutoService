@@ -1,7 +1,7 @@
 package com.mate.test.autoservice.service.impl;
 
+import com.mate.test.autoservice.model.PaymentStatus;
 import com.mate.test.autoservice.model.Task;
-import com.mate.test.autoservice.model.TypeOfTask;
 import com.mate.test.autoservice.repository.TaskRepository;
 import com.mate.test.autoservice.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -15,15 +15,15 @@ public class TaskServiceImpl implements TaskService<Task> {
     }
 
     @Override
-    public void add(Task task) {
-        taskRepository.save(task);
+    public Task add(Task entity) {
+        return taskRepository.save(entity);
     }
 
     @Override
-    public void updateTaskStatus(Long taskId, TypeOfTask taskType) {
+    public Task updateTaskStatus(Long taskId, PaymentStatus status) {
         Task task = getTaskById(taskId);
-        task.setTypeOfTask(taskType);
-        add(task);
+        task.setPaymentStatus(status);
+        return add(task);
     }
 
     @Override

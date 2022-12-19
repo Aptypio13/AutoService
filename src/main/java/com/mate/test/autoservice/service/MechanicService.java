@@ -5,13 +5,13 @@ import com.mate.test.autoservice.model.Order;
 
 import java.util.List;
 public interface MechanicService<T> {
-    void add(T t);
-
-    List<T> getAll();
+    T add(T entity);
 
     List<Order> getOrdersByMechanicId(Long id);
 
     Mechanic getById(Long id);
 
     Double getSalaryById(Long id);
+
+    T update(Long id, T entity);
 }

@@ -14,13 +14,21 @@ public class ProductServiceImpl implements ProductService<Product> {
     }
 
     @Override
-    public void add(Product product) {
-        productRepository.save(product);
+    public Product add(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
     public Product getById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No such product with id: " + id));
+    }
+
+    @Override
+    public Product update(Long id, Product entity) {
+        Product product = getById(id);
+        product.setName(entity.getName());
+        product.setPrice(entity.getPrice());
+        return productRepository.save(product);
     }
 }
