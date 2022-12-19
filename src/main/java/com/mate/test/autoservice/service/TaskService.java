@@ -1,10 +1,10 @@
 package com.mate.test.autoservice.service;
 
-import com.mate.test.autoservice.model.TypeOfTask;
+import com.mate.test.autoservice.model.PaymentStatus;
 public interface TaskService<T> {
-    void add(T t);
+    T add(T entity);
 
-    void updateTaskStatus(Long taskId, TypeOfTask task);
+    T updateTaskStatus(Long taskId, PaymentStatus paymentStatus);
 
     T getTaskById(Long id);
 

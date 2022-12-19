@@ -1,6 +1,8 @@
 package com.mate.test.autoservice.service;
 
 public interface ProductService<T> {
-    void add(T t);
+    T add(T entity);
     T getById(Long id);
+
+    T update(Long id, T entity);
 }
