@@ -1,14 +1,16 @@
 package com.mate.test.autoservice.controller;
 
 import com.mate.test.autoservice.dto.requestDto.OrderRequestDto;
-import com.mate.test.autoservice.dto.requestDto.ProductRequestDto;
+import com.mate.test.autoservice.dto.responseDto.OrderResponseDto;
 import com.mate.test.autoservice.mapper.RequestMapper;
+import com.mate.test.autoservice.mapper.ResponseMapper;
 import com.mate.test.autoservice.model.Order;
 import com.mate.test.autoservice.model.OrderStatus;
-import com.mate.test.autoservice.model.Product;
 import com.mate.test.autoservice.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,30 +23,37 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class OrderController {
     private final OrderService<Order> orderService;
-    private final RequestMapper<Order, OrderRequestDto> orderRequestMapper;
-    private final RequestMapper<Product, ProductRequestDto> productRequestMapper;
+    private final RequestMapper<Order, OrderRequestDto> requestMapper;
+    private final ResponseMapper<Order, OrderResponseDto> responseOrderMapper;
 
-    @PostMapping("/add")
-    public void createOrder(@RequestBody OrderRequestDto order) {
-        orderService.add(orderRequestMapper.toModel(order));
+    @PostMapping()
+    @Operation(description = "save order to DB")
+    public OrderResponseDto createOrder(@RequestBody OrderRequestDto order) {
+        return responseOrderMapper.toDto(orderService.add(requestMapper.toModel(order)));
     }
 
-    @PostMapping("/add/{id}")
-    public void addProductToOrder(@RequestBody ProductRequestDto product,@PathVariable Long id) {
-        orderService.addProduct(productRequestMapper.toModel(product), id);
+    @PatchMapping("/{orderId}/product={productId}")
+    @Operation(description = "add a product to order")
+    public OrderResponseDto addProductToOrder(
+            @PathVariable Long orderId,
+            @PathVariable Long productId) {
+        return responseOrderMapper.toDto(orderService.addProduct(orderId, productId));
     }
 
-    @PutMapping("/update")
-    public void updateOrder(@RequestBody OrderRequestDto order) {
-        orderService.add(orderRequestMapper.toModel(order));
+    @PutMapping("/{id}")
+    @Operation(description = "update order information")
+    public OrderResponseDto updateOrder(@PathVariable Long id, @RequestBody OrderRequestDto order) {
+        return responseOrderMapper.toDto(orderService.update(id, requestMapper.toModel(order)));
     }
 
-    @PutMapping("/update/{orderId}&{status}")
-    public void updateOrderStatus(@PathVariable Long orderId,@PathVariable OrderStatus status) {
-        orderService.updateOrderStatus(orderId, status);
+    @PatchMapping("/{Id}")
+    @Operation(description = "update order status")
+    public OrderResponseDto updateOrderStatus(@PathVariable Long id,@RequestBody OrderStatus status) {
+       return responseOrderMapper.toDto(orderService.updateOrderStatus(id, status));
     }
 
     @GetMapping("/total-price")
+    @Operation(description = "get a total price of order")
     public Double getTotalCost(Long id) {
         return orderService.getTotalCostById(id);
     }

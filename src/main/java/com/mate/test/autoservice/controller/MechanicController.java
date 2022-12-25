@@ -10,6 +10,7 @@ import com.mate.test.autoservice.mapper.ResponseMapper;
 import com.mate.test.autoservice.model.Mechanic;
 import com.mate.test.autoservice.model.Order;
 import com.mate.test.autoservice.service.MechanicService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,28 +26,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class MechanicController {
     private final MechanicService<Mechanic> mechanicService;
     private final RequestMapper<Mechanic, MechanicRequestDto> requestMapper;
-    private final ResponseMapper<Order, OrderResponseDto> orderResponseMapper;
+    private final ResponseMapper<Order, OrderResponseDto> responseOrderMapper;
+    private final ResponseMapper<Mechanic, MechanicResponseDto> responseMechanicMapper;
 
-    @PostMapping("/add")
-    public void createMechanic(@RequestBody MechanicRequestDto mechanic) {
-        mechanicService.add(requestMapper.toModel(mechanic));
+    @PostMapping()
+    @Operation(description = "save mechanic to DB")
+    public MechanicResponseDto createMechanic(@RequestBody MechanicRequestDto mechanic) {
+        return responseMechanicMapper.toDto(mechanicService.add(requestMapper.toModel(mechanic)));
     }
 
-    @PutMapping("/update")
-    public void updateMechanic(@RequestBody MechanicRequestDto mechanic) {
-        mechanicService.add(requestMapper.toModel(mechanic));
+    @PutMapping("/{id}")
+    @Operation(description = "update mechanic information")
+    public MechanicResponseDto updateMechanic(@PathVariable Long id, @RequestBody MechanicRequestDto mechanic) {
+        return responseMechanicMapper.toDto(mechanicService.update(id, requestMapper.toModel(mechanic)));
     }
 
     @GetMapping("/orders/{id}")
+    @Operation(description = "get all mechanic orders")
     public List<OrderResponseDto> getOrders(@PathVariable Long id) {
         return mechanicService
                 .getOrdersByMechanicId(id)
                 .stream()
-                .map(orderResponseMapper ::toDto)
+                .map(responseOrderMapper ::toDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/salary/{id}")
+    @Operation(description = "get mechanic salary")
     public Double getMechanicSalaryById(@PathVariable Long id) {
         return mechanicService.getSalaryById(id);
     }
