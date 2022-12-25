@@ -1,20 +1,21 @@
 package com.mate.test.autoservice.model;
 
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 @ToString
 @Table(name = "owners")
+@NoArgsConstructor
 public class CarOwner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
