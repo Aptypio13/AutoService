@@ -1,4 +1,4 @@
-package com.mate.test.autoservice.model;
+package com.mate.autoservice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,4 +59,16 @@ public class Order {
     @Column(name = "total_cost")
     private Double totalCost;
 
+    public Double getTotalCost() {
+        double productsCost = products
+                .stream()
+                .mapToDouble(Product :: getPrice)
+                .sum();
+        double tasksCost = tasks
+                .stream()
+                .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
+                .mapToDouble(Task :: getPrice)
+                .sum();
+        return productsCost + tasksCost;
+    }
 }
