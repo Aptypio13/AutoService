@@ -3,6 +3,7 @@ package com.mate.test.autoservice.service.impl;
 import com.mate.test.autoservice.model.Product;
 import com.mate.test.autoservice.repository.ProductRepository;
 import com.mate.test.autoservice.service.ProductService;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,7 @@ public class ProductServiceImpl implements ProductService<Product> {
     }
 
     @Override
-    public Product add(Product product) {
+    public Product add(@NonNull Product product) {
         return productRepository.save(product);
     }
 

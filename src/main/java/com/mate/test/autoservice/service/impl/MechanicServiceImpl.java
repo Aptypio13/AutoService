@@ -6,6 +6,7 @@ import com.mate.test.autoservice.model.OrderStatus;
 import com.mate.test.autoservice.repository.MechanicRepository;
 import com.mate.test.autoservice.service.MechanicService;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class MechanicServiceImpl implements MechanicService<Mechanic> {
     private final static Double MECHANIC_COMMISSION = 0.4;
-    private final MechanicRepository mechanicRepository;
+    private final MechanicRepository<Mechanic> mechanicRepository;
 
     @Override
-    public Mechanic add(Mechanic mechanic) {
+    public Mechanic add(@NonNull Mechanic mechanic) {
         return mechanicRepository.save(mechanic);
     }
 
@@ -48,7 +49,7 @@ public class MechanicServiceImpl implements MechanicService<Mechanic> {
     }
 
     @Override
-    public Mechanic update(Long id, Mechanic mechanicUpdate) {
+    public Mechanic update(@NonNull Long id, @NonNull Mechanic mechanicUpdate) {
         Mechanic mechanic = getById(id);
         mechanic.setFirstName(mechanicUpdate.getFirstName());
         mechanic.setOrders(mechanicUpdate.getOrders());

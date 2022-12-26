@@ -26,7 +26,7 @@ public class CarOwnerRequestMapper implements RequestMapper<CarOwner, CarOwnerRe
                 .collect(Collectors.toList()));
         carOwner.setOrders(dto.getOrdersId()
                 .stream()
-                .map(orderService::getOrderById)
+                .map(orderService:: getById)
                 .collect(Collectors.toList()));
         return carOwner;
     }

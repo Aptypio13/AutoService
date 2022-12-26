@@ -19,7 +19,7 @@ public class TaskRequestMapper implements RequestMapper<Task, TaskRequestDto> {
     public Task toModel(TaskRequestDto dto) {
         Task task = new Task();
         task.setMechanic(mechanicService.getById(dto.getMechanicId()));
-        task.setOrder(orderService.getOrderById(dto.getOrderId()));
+        task.setOrder(orderService.getById(dto.getOrderId()));
         task.setTypeOfTask(dto.getTypeOfTask());
         task.setPrice(dto.getPrice());
         task.setPaymentStatus(dto.getPaymentStatus());

@@ -1,7 +1,5 @@
 package com.mate.test.autoservice.service.impl;
 
-import java.time.LocalDate;
-import java.util.List;
 import com.mate.test.autoservice.model.Order;
 import com.mate.test.autoservice.model.OrderStatus;
 import com.mate.test.autoservice.model.Product;
@@ -10,12 +8,17 @@ import com.mate.test.autoservice.repository.OrderRepository;
 import com.mate.test.autoservice.service.OrderService;
 import com.mate.test.autoservice.service.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
+
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService<Order> {
-    private final OrderRepository orderRepository;
+    private final OrderRepository<Order> orderRepository;
     private final ProductService<Product> productService;
     private static final Double DISCOUNT_FOR_TASK = 0.2;
     private static final Double DISCOUNT_FOR_PRODUCT = 0.1;
@@ -46,7 +49,7 @@ public class OrderServiceImpl implements OrderService<Order> {
     }
 
     @Override
-    public Order add(Order order) {
+    public Order add(@NonNull Order order) {
         return orderRepository.save(order);
     }
 
@@ -67,7 +70,7 @@ public class OrderServiceImpl implements OrderService<Order> {
     }
 
     @Override
-    public Order updateOrderStatus(Long orderId, OrderStatus status) {
+    public Order updateOrderStatus(@NotNull Long orderId,@NotNull OrderStatus status) {
         Order order = getById(orderId);
         order.setOrderStatus(status);
         if (order.getOrderStatus() == OrderStatus.SUCCESSFUL_DONE ||
@@ -78,7 +81,7 @@ public class OrderServiceImpl implements OrderService<Order> {
     }
 
     @Override
-    public Order update(Long id, Order entity) {
+    public Order update(Long id, @NonNull Order entity) {
         Order order = getById(id);
         order.setOrderStatus(entity.getOrderStatus());
         order.setProducts(entity.getProducts());

@@ -4,6 +4,7 @@ import com.mate.test.autoservice.model.CarOwner;
 import com.mate.test.autoservice.repository.CarOwnerRepository;
 import com.mate.test.autoservice.service.CarOwnerService;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +13,7 @@ public class CarOwnerServiceImpl implements CarOwnerService<CarOwner> {
     private final CarOwnerRepository<CarOwner> carOwnerRepository;
 
     @Override
-    public CarOwner add(CarOwner carOwner) {
+    public CarOwner add(@NonNull CarOwner carOwner) {
         return carOwnerRepository.save(carOwner);
     }
 

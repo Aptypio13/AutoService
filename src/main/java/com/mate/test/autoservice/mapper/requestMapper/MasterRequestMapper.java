@@ -4,7 +4,6 @@ import com.mate.test.autoservice.dto.requestDto.MechanicRequestDto;
 import com.mate.test.autoservice.mapper.RequestMapper;
 import com.mate.test.autoservice.model.Mechanic;
 import com.mate.test.autoservice.model.Order;
-import com.mate.test.autoservice.service.MechanicService;
 import com.mate.test.autoservice.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,7 @@ public class MasterRequestMapper implements RequestMapper<Mechanic, MechanicRequ
         mechanic.setFirstName(dto.getFirstName());
         mechanic.setOrders(dto.getFinishedOrdersId()
                 .stream()
-                .map(orderService::getOrderById)
+                .map(orderService:: getById)
                 .collect(Collectors.toList()));
         mechanic.setLastName(dto.getLastName());
         mechanic.setMiddleName(dto.getMiddleName());
