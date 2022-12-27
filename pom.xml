@@ -18,7 +18,7 @@
         <java.version>18</java.version>
         <springBoot.version>3.0.0</springBoot.version>
         <maven.checkstyle.plugin.configuration>
-            checkstyleCinema.xml
+            checkstyle.xml
         </maven.checkstyle.plugin.configuration>
     </properties>
     <dependencies>
