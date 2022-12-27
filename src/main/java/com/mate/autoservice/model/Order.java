@@ -12,14 +12,13 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -31,7 +30,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false, unique=true)
+    @Column(name = "id", updatable = false, nullable = false, unique = true)
     private Long id;
     @OneToOne
     @JoinColumn(name = "car_id")
@@ -62,12 +61,12 @@ public class Order {
     public Double getTotalCost() {
         double productsCost = products
                 .stream()
-                .mapToDouble(Product :: getPrice)
+                .mapToDouble(Product::getPrice)
                 .sum();
         double tasksCost = tasks
                 .stream()
                 .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
-                .mapToDouble(Task :: getPrice)
+                .mapToDouble(Task::getPrice)
                 .sum();
         return productsCost + tasksCost;
     }
