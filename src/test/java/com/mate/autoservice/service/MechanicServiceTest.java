@@ -1,10 +1,13 @@
-package com.mate.test.autoservice.service;
+package com.mate.autoservice.service;
 
-import com.mate.test.autoservice.model.Mechanic;
-import com.mate.test.autoservice.model.Order;
-import com.mate.test.autoservice.model.OrderStatus;
-import com.mate.test.autoservice.repository.MechanicRepository;
-import com.mate.test.autoservice.service.impl.MechanicServiceImpl;
+import com.mate.autoservice.model.PaymentStatus;
+import com.mate.autoservice.model.Product;
+import com.mate.autoservice.model.Task;
+import com.mate.autoservice.repository.MechanicRepository;
+import com.mate.autoservice.model.Mechanic;
+import com.mate.autoservice.model.Order;
+import com.mate.autoservice.model.OrderStatus;
+import com.mate.autoservice.service.impl.MechanicServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -83,14 +86,19 @@ public class MechanicServiceTest {
     void whenGetSalaryByIdCorrect_ThenOk() {
         Mechanic mechanic = new Mechanic();
         List<Order> orderList = new ArrayList<>();
-        Order order = new Order();
-        order.setOrderStatus(OrderStatus.SUCCESSFUL_DONE);
-        order.setTotalCost(100.0);
-        orderList.add(order);
-        orderList.add(order);
-        orderList.add(order);
+        Order orderMock = new Order();
+        Product productMock = new Product();
+        productMock.setPrice(100.0);
+        productMock.setName("MockRoduct");
+        Task taskMock = new Task();
+        taskMock.setPrice(1000.0);
+        taskMock.setPaymentStatus(PaymentStatus.NOT_PAID);
+        orderMock.setOrderStatus(OrderStatus.SUCCESSFUL_DONE);
+        orderMock.setProducts(List.of(productMock));
+        orderMock.setTasks(List.of());
+        orderMock.setTasks(List.of(taskMock));
+        orderList.add(orderMock);
         mechanic.setOrders(orderList);
-        System.out.println(orderList);
         Double expected = orderList
                 .stream()
                 .mapToDouble(Order::getTotalCost)
