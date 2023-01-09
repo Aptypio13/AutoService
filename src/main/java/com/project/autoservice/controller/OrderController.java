@@ -46,7 +46,7 @@ public class OrderController {
         return responseOrderMapper.toDto(orderService.update(id, requestMapper.toModel(order)));
     }
 
-    @PatchMapping("/{Id}")
+    @PatchMapping("/{id}")
     @Operation(description = "update order status")
     public OrderResponseDto updateOrderStatus(
             @PathVariable Long id,@RequestBody OrderStatus status) {
