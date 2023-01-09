@@ -41,7 +41,6 @@ public class Order {
     private LocalDate dateOfApplication;
     @Column(name = "date_of_completion")
     private LocalDate dateOfCompletion;
-
     @OneToMany
     @JoinTable(name = "order_task",
             joinColumns = @JoinColumn(name = "id"),

@@ -2,11 +2,8 @@ package com.project.autoservice.dto.response;
 
 import com.project.autoservice.model.Car;
 import com.project.autoservice.model.OrderStatus;
-import com.project.autoservice.model.Product;
-import com.project.autoservice.model.Task;
 import java.time.LocalDate;
 import java.util.List;
-
 import lombok.Data;
 
 @Data

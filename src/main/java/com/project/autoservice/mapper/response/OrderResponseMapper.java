@@ -6,10 +6,9 @@ import com.project.autoservice.model.Order;
 import com.project.autoservice.model.Product;
 import com.project.autoservice.model.Task;
 import com.project.autoservice.service.OrderService;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -24,11 +23,17 @@ public class OrderResponseMapper implements ResponseMapper<Order, OrderResponseD
         dto.setId(model.getId());
         dto.setTotalCost(orderService.getTotalCostById(model.getId()));
         dto.setOrderStatus(model.getOrderStatus());
-        dto.setTasksId(model.getTasks().stream().map(Task::getId).collect(Collectors.toList()));
+        dto.setTasksId(model.getTasks()
+                .stream()
+                .map(Task::getId)
+                .collect(Collectors.toList()));
         dto.setDateOfApplication(model.getDateOfApplication());
         dto.setDateOfCompletion(model.getDateOfCompletion());
         dto.setDescriptionOfProblem(model.getDescriptionOfProblem());
-        dto.setProductsId(model.getProducts().stream().map(Product ::getId).collect(Collectors.toList()));
+        dto.setProductsId(model.getProducts()
+                .stream()
+                .map(Product::getId)
+                .collect(Collectors.toList()));
         return dto;
     }
 }

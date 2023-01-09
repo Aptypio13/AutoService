@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepository<T> extends JpaRepository<Order, Long> {
-    List<Order> findAllByCar_OwnerId(Long id);
+    List<Order> findAllByCarOwnerId(Long id);
 }

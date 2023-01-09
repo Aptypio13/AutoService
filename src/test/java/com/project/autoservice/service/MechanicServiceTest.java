@@ -1,12 +1,9 @@
 package com.project.autoservice.service;
 
-import com.project.autoservice.model.PaymentStatus;
-import com.project.autoservice.model.Product;
-import com.project.autoservice.model.Task;
-import com.project.autoservice.repository.MechanicRepository;
 import com.project.autoservice.model.Mechanic;
 import com.project.autoservice.model.Order;
 import com.project.autoservice.model.OrderStatus;
+import com.project.autoservice.repository.MechanicRepository;
 import com.project.autoservice.service.impl.MechanicServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -84,28 +81,16 @@ public class MechanicServiceTest {
 
     @Test
     void whenGetSalaryByIdCorrect_ThenOk() {
-        Mechanic mechanic = new Mechanic();
-        List<Order> orderList = new ArrayList<>();
-        Order orderMock = new Order();
-        Product productMock = new Product();
-        productMock.setPrice(100.0);
-        productMock.setName("MockRoduct");
-        Task taskMock = new Task();
-        taskMock.setPrice(1000.0);
-        taskMock.setPaymentStatus(PaymentStatus.NOT_PAID);
-        orderMock.setOrderStatus(OrderStatus.SUCCESSFUL_DONE);
-        orderMock.setProducts(List.of(productMock));
-        orderMock.setTasks(List.of());
-        orderMock.setTasks(List.of(taskMock));
-        orderList.add(orderMock);
-        mechanic.setOrders(orderList);
-        Double expected = orderList
-                .stream()
-                .mapToDouble(Order::getTotalCost)
-                .sum() * 0.4;
+        Mechanic mechanic = Mockito.mock(Mechanic.class, Mockito.RETURNS_DEEP_STUBS);
+        Double expected = 100D * MechanicServiceImpl.MECHANIC_COMMISSION;
+        Order mockOrder = new Order();
+        mockOrder.setOrderStatus(OrderStatus.SUCCESSFUL_DONE);
+        mockOrder.setTotalCost(100D);
+        Mockito.when(mechanicRepository.findById(1L))
+                        .thenReturn(Optional.ofNullable(mechanic));
         Mockito
-                .when(mechanicRepository.findById(1L))
-                .thenReturn(Optional.of(mechanic));
+                .when(mechanic.getOrders())
+                .thenReturn(List.of(mockOrder));
         Double actual = mechanicService.getSalaryById(1L);
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected, actual);

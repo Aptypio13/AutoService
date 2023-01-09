@@ -1,11 +1,12 @@
 package com.project.autoservice.service;
 
+import com.project.autoservice.model.PaymentStatus;
 import com.project.autoservice.model.Product;
 import com.project.autoservice.model.Order;
+import com.project.autoservice.model.Task;
 import com.project.autoservice.repository.OrderRepository;
 import com.project.autoservice.service.impl.OrderServiceImpl;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Answers;
 import org.mockito.InjectMocks;
@@ -34,7 +35,7 @@ public class OrdersServiceTest {
         expectedOrders.add(new Order());
         expectedOrders.add(new Order());
         Mockito
-                .when(orderRepository.findAllByCar_OwnerId(1L))
+                .when(orderRepository.findAllByCarOwnerId(1L))
                 .thenReturn(expectedOrders);
         List<Order> actual = orderService.getAllByOwnerId(1L);
         Assertions.assertNotNull(actual);
@@ -44,14 +45,26 @@ public class OrdersServiceTest {
     @Test
     void whenGetTotalCostByIdCorrect_ThanOk() {
         Order testOrder = Mockito.mock(Order.class, Answers.RETURNS_DEEP_STUBS);
+        Product product = new Product();
+        product.setName("TestProduct");
+        product.setPrice(100.0);
+        Task task = new Task();
+        task.setPrice(56.0);
+        task.setPaymentStatus(PaymentStatus.NOT_PAID);
+        List<Product> products = List.of(product);
+        List<Task> tasks = List.of(task);
         Mockito
                 .when(orderRepository.findById(1L))
                 .thenReturn(Optional.of(testOrder));
         Mockito
                 .when(testOrder.getCar().getOwner().getOrders().size())
                 .thenReturn(1);
-        Mockito.when(testOrder.getTotalCost())
-                .thenReturn(156.0);
+        Mockito
+                .when(testOrder.getProducts())
+                .thenReturn(products);
+        Mockito
+                .when(testOrder.getTasks())
+                .thenReturn(tasks);
         Double actual = orderService.getTotalCostById(1L);
         Double expectedTotalCost = 155.7;
         Assertions.assertNotNull(actual);

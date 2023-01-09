@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService<Order> {
 
     @Override
     public List<Order> getAllByOwnerId(Long id) {
-        return orderRepository.findAllByCar_OwnerId(id);
+        return orderRepository.findAllByCarOwnerId(id);
     }
 
     @Override
@@ -43,23 +43,6 @@ public class OrderServiceImpl implements OrderService<Order> {
             return getTotalCost(order.getProducts(), order.getTasks()) - discount;
         }
         return getTotalCost(order.getProducts(), order.getTasks());
-    }
-
-    public Double getTotalCost(List<Product> products, List<Task> tasks) {
-        double productsCost = products
-                .stream()
-                .mapToDouble(Product::getPrice)
-                .sum();
-        double tasksCost = tasks
-                .stream()
-                .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
-                .mapToDouble(Task ::getPrice)
-                .sum();
-        return productsCost + tasksCost;
-    }
-
-    private boolean isDiagnostic(Order order) {
-        return order.getTasks().stream().anyMatch(t -> t.getTypeOfTask() == TypeOfTask.DIAGNOSTICS);
     }
 
     @Override
@@ -105,5 +88,22 @@ public class OrderServiceImpl implements OrderService<Order> {
         order.setDescriptionOfProblem(entity.getDescriptionOfProblem());
         order.setTotalCost(order.getTotalCost());
         return orderRepository.save(order);
+    }
+
+    private boolean isDiagnostic(Order order) {
+        return order.getTasks().stream().anyMatch(t -> t.getTypeOfTask() == TypeOfTask.DIAGNOSTICS);
+    }
+
+    private Double getTotalCost(List<Product> products, List<Task> tasks) {
+        double productsCost = products
+                .stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
+        double tasksCost = tasks
+                .stream()
+                .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
+                .mapToDouble(Task::getPrice)
+                .sum();
+        return productsCost + tasksCost;
     }
 }

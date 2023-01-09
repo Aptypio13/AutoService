@@ -6,7 +6,6 @@ import com.project.autoservice.model.OrderStatus;
 import com.project.autoservice.repository.MechanicRepository;
 import com.project.autoservice.service.MechanicService;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class MechanicServiceImpl implements MechanicService<Mechanic> {
-    private static final Double MECHANIC_COMMISSION = 0.4;
+    public static final Double MECHANIC_COMMISSION = 0.4;
     private final MechanicRepository<Mechanic> mechanicRepository;
 
     @Override

@@ -1,8 +1,6 @@
 package com.project.autoservice.dto.response;
 
-import com.project.autoservice.model.Order;
 import java.util.List;
-
 import lombok.Data;
 
 @Data
