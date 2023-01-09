@@ -1,16 +1,17 @@
-package com.mate.autoservice.mapper.request;
+package com.project.autoservice.mapper.request;
 
-import com.mate.autoservice.dto.request.OrderRequestDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.model.Car;
-import com.mate.autoservice.model.Order;
-import com.mate.autoservice.model.OrderStatus;
-import com.mate.autoservice.model.Product;
-import com.mate.autoservice.model.Task;
-import com.mate.autoservice.service.CarService;
-import com.mate.autoservice.service.ProductService;
-import com.mate.autoservice.service.TaskService;
+import com.project.autoservice.dto.request.OrderRequestDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.model.Car;
+import com.project.autoservice.model.Order;
+import com.project.autoservice.model.OrderStatus;
+import com.project.autoservice.model.Product;
+import com.project.autoservice.model.Task;
+import com.project.autoservice.service.CarService;
+import com.project.autoservice.service.ProductService;
+import com.project.autoservice.service.TaskService;
 import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,6 @@ public class OrderRequestMapper implements RequestMapper<Order, OrderRequestDto>
     public Order toModel(OrderRequestDto dto) {
         Order order = new Order();
         order.setCar(carService.getById(dto.getCarId()));
-        order.setTotalCost(1000.0);
         order.setOrderStatus(OrderStatus.RECEIVED);
         order.setProducts(dto.getProductsId()
                 .stream()
