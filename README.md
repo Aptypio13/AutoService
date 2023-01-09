@@ -2,7 +2,7 @@
 
 ## Description
 
-It a simple web app buildet on SpringBoot, to simplify auto-service accounting work. Program can calculate a salary of mechanics :mechanic: ,
+It a simple web application buildet on SpringBoot, to simplify auto-service accounting work. Program can calculate a salary of mechanics :mechanic: ,
 save the history of orders, make a discontto returning costumers. Also program easy to expend and update.
 
 ## Technologies
@@ -34,23 +34,22 @@ Service layer
 - Calculate a order cost :dollar:
 
 ## Quickstart
-1. Fork this repository
-2. Copy link of project
-3. Create new project from Version Control
-4. Edit resources/application.properties - set the necessary parameters
+1. Copy link of project
+2. Create new project from Version Control 
+3. Edit resources/application.properties - set the necessary parameters
 ``` java
     spring.datasource.driver-class-name=YOUR_DRIVER
     spring.datasource.url=YOUR_URL
     spring.datasource.username=YOUR_USERNAME
     spring.datasource.password=YOUR_PASSWORD
 ```
-5. Do not forget set this param on "create" for first project run. Like this: 
+4. Do not forget set this param on "create" for first run of the project. Like this: 
 ``` java
     spring.jpa.hibernate.ddl-auto=create
 ```
-6. Create the necessary name of DB
-7. Run project
-8. Enjoy
+5. Create the necessary name of DB
+6. Run project
+7. Enjoy
 
 ## :car:
 
