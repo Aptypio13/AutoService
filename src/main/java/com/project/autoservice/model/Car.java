@@ -1,4 +1,4 @@
-package com.mate.autoservice.model;
+package com.project.autoservice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +37,6 @@ public class Car {
     private LocalDate yearOfManufacture;
     @Column(name = "number")
     private String number;
-
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private CarOwner owner;
