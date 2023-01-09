@@ -1,17 +1,18 @@
-package com.mate.autoservice.mapper.request;
+package com.project.autoservice.mapper.request;
 
-import com.mate.autoservice.dto.request.MechanicRequestDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.model.Mechanic;
-import com.mate.autoservice.model.Order;
-import com.mate.autoservice.service.OrderService;
+import com.project.autoservice.dto.request.MechanicRequestDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.model.Mechanic;
+import com.project.autoservice.model.Order;
+import com.project.autoservice.service.OrderService;
 import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class MasterRequestMapper implements RequestMapper<Mechanic, MechanicRequestDto> {
+public class MechanicRequestMapper implements RequestMapper<Mechanic, MechanicRequestDto> {
     private final OrderService<Order> orderService;
 
     @Override
