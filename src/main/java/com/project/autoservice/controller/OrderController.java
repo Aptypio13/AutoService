@@ -1,12 +1,12 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.OrderRequestDto;
-import com.mate.autoservice.dto.response.OrderResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.Order;
-import com.mate.autoservice.model.OrderStatus;
-import com.mate.autoservice.service.OrderService;
+import com.project.autoservice.dto.request.OrderRequestDto;
+import com.project.autoservice.dto.response.OrderResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.Order;
+import com.project.autoservice.model.OrderStatus;
+import com.project.autoservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 @AllArgsConstructor
 public class OrderController {
     private final OrderService<Order> orderService;

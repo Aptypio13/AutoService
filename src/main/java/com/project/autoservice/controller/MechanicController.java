@@ -1,13 +1,13 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.MechanicRequestDto;
-import com.mate.autoservice.dto.response.MechanicResponseDto;
-import com.mate.autoservice.dto.response.OrderResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.Mechanic;
-import com.mate.autoservice.model.Order;
-import com.mate.autoservice.service.MechanicService;
+import com.project.autoservice.dto.request.MechanicRequestDto;
+import com.project.autoservice.dto.response.MechanicResponseDto;
+import com.project.autoservice.dto.response.OrderResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.Mechanic;
+import com.project.autoservice.model.Order;
+import com.project.autoservice.service.MechanicService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/mechanic")
+@RequestMapping("/mechanics")
 @AllArgsConstructor
 public class MechanicController {
     private final MechanicService<Mechanic> mechanicService;

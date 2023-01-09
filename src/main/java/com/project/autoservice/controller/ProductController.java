@@ -1,11 +1,11 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.ProductRequestDto;
-import com.mate.autoservice.dto.response.ProductResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.Product;
-import com.mate.autoservice.service.ProductService;
+import com.project.autoservice.dto.request.ProductRequestDto;
+import com.project.autoservice.dto.response.ProductResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.Product;
+import com.project.autoservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 @AllArgsConstructor
 public class ProductController {
     private final ProductService<Product> productService;

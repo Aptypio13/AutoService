@@ -1,11 +1,11 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.CarRequestDto;
-import com.mate.autoservice.dto.response.CarResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.Car;
-import com.mate.autoservice.service.CarService;
+import com.project.autoservice.dto.request.CarRequestDto;
+import com.project.autoservice.dto.response.CarResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.Car;
+import com.project.autoservice.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/cars")
 @AllArgsConstructor
 public class CarController {
     private final CarService<Car> carService;

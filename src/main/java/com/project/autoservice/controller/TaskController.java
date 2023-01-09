@@ -1,12 +1,12 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.TaskRequestDto;
-import com.mate.autoservice.dto.response.TaskResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.PaymentStatus;
-import com.mate.autoservice.model.Task;
-import com.mate.autoservice.service.TaskService;
+import com.project.autoservice.dto.request.TaskRequestDto;
+import com.project.autoservice.dto.response.TaskResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.PaymentStatus;
+import com.project.autoservice.model.Task;
+import com.project.autoservice.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/tasks")
 @AllArgsConstructor
 public class TaskController {
     private final TaskService<Task> taskService;

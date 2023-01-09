@@ -1,14 +1,14 @@
-package com.mate.autoservice.controller;
+package com.project.autoservice.controller;
 
-import com.mate.autoservice.dto.request.CarOwnerRequestDto;
-import com.mate.autoservice.dto.response.CarOwnerResponseDto;
-import com.mate.autoservice.dto.response.OrderResponseDto;
-import com.mate.autoservice.mapper.RequestMapper;
-import com.mate.autoservice.mapper.ResponseMapper;
-import com.mate.autoservice.model.CarOwner;
-import com.mate.autoservice.model.Order;
-import com.mate.autoservice.service.CarOwnerService;
-import com.mate.autoservice.service.OrderService;
+import com.project.autoservice.dto.request.CarOwnerRequestDto;
+import com.project.autoservice.dto.response.CarOwnerResponseDto;
+import com.project.autoservice.dto.response.OrderResponseDto;
+import com.project.autoservice.mapper.RequestMapper;
+import com.project.autoservice.mapper.ResponseMapper;
+import com.project.autoservice.model.CarOwner;
+import com.project.autoservice.model.Order;
+import com.project.autoservice.service.CarOwnerService;
+import com.project.autoservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/owners")
 @AllArgsConstructor
 public class CarOwnerController {
     private final CarOwnerService<CarOwner> carOwnerService;
@@ -47,7 +47,7 @@ public class CarOwnerController {
 
     @GetMapping("/orders/{id}")
     @Operation(description = "get all owner orders")
-    public List<OrderResponseDto> getOrders(@PathVariable Long id) {
+    public List<OrderResponseDto> getOrdersByOwnerId(@PathVariable Long id) {
         return orderService.getAllByOwnerId(id)
                 .stream()
                 .map(responseOrderMapper::toDto)
