@@ -13,4 +13,5 @@ public enum TypeOfTask {
     TypeOfTask(String value) {
         this.value = value;
     }
+
 }
