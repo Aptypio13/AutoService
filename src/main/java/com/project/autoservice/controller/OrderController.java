@@ -32,7 +32,7 @@ public class OrderController {
         return responseOrderMapper.toDto(orderService.add(requestMapper.toModel(order)));
     }
 
-    @PatchMapping("/{orderId}/product={productId}")
+    @PatchMapping("/{orderId}/{productId}")
     @Operation(description = "add a product to order")
     public OrderResponseDto addProductToOrder(
             @PathVariable Long orderId,
@@ -55,7 +55,7 @@ public class OrderController {
 
     @GetMapping("/total-price")
     @Operation(description = "get a total price of order")
-    public Double getTotalCost(Long id) {
+    public Double getTotalPrice(Long id) {
         return orderService.getTotalCostById(id);
     }
 }

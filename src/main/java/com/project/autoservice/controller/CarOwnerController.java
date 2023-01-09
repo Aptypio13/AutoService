@@ -45,7 +45,7 @@ public class CarOwnerController {
                 .toDto(carOwnerService.update(id, requestMapper.toModel(carOwner)));
     }
 
-    @GetMapping("/orders/{id}")
+    @GetMapping("/{id}/orders")
     @Operation(description = "get all owner orders")
     public List<OrderResponseDto> getOrdersByOwnerId(@PathVariable Long id) {
         return orderService.getAllByOwnerId(id)

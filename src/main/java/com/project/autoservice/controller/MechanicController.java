@@ -43,7 +43,7 @@ public class MechanicController {
                 .toDto(mechanicService.update(id, requestMapper.toModel(mechanic)));
     }
 
-    @GetMapping("/orders/{id}")
+    @GetMapping("/{id}/orders")
     @Operation(description = "get all mechanic orders")
     public List<OrderResponseDto> getOrders(@PathVariable Long id) {
         return mechanicService
@@ -53,7 +53,7 @@ public class MechanicController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/salary/{id}")
+    @GetMapping("/{id}/salary")
     @Operation(description = "get mechanic salary")
     public Double getMechanicSalaryById(@PathVariable Long id) {
         return mechanicService.getSalaryById(id);
