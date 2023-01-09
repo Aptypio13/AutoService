@@ -2,7 +2,9 @@ package com.project.autoservice.service.impl;
 
 import com.project.autoservice.model.Order;
 import com.project.autoservice.model.OrderStatus;
+import com.project.autoservice.model.PaymentStatus;
 import com.project.autoservice.model.Product;
+import com.project.autoservice.model.Task;
 import com.project.autoservice.model.TypeOfTask;
 import com.project.autoservice.repository.OrderRepository;
 import com.project.autoservice.service.OrderService;
@@ -38,9 +40,22 @@ public class OrderServiceImpl implements OrderService<Order> {
         if (countOfOrdersOfThisOwner > 0) {
             double discount = (countOfOrdersOfThisOwner * DISCOUNT_FOR_TASK)
                     + (countOfOrdersOfThisOwner * DISCOUNT_FOR_PRODUCT);
-            return order.getTotalCost() - discount;
+            return getTotalCost(order.getProducts(), order.getTasks()) - discount;
         }
-        return order.getTotalCost();
+        return getTotalCost(order.getProducts(), order.getTasks());
+    }
+
+    public Double getTotalCost(List<Product> products, List<Task> tasks) {
+        double productsCost = products
+                .stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
+        double tasksCost = tasks
+                .stream()
+                .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
+                .mapToDouble(Task ::getPrice)
+                .sum();
+        return productsCost + tasksCost;
     }
 
     private boolean isDiagnostic(Order order) {

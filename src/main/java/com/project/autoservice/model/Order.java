@@ -57,17 +57,4 @@ public class Order {
     private OrderStatus orderStatus;
     @Column(name = "total_cost")
     private Double totalCost;
-
-    public Double getTotalCost() {
-        double productsCost = products
-                .stream()
-                .mapToDouble(Product::getPrice)
-                .sum();
-        double tasksCost = tasks
-                .stream()
-                .filter(task -> task.getPaymentStatus() != PaymentStatus.PAID)
-                .mapToDouble(Task::getPrice)
-                .sum();
-        return productsCost + tasksCost;
-    }
 }
