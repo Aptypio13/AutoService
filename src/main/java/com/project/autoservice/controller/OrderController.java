@@ -32,12 +32,12 @@ public class OrderController {
         return responseOrderMapper.toDto(orderService.add(requestMapper.toModel(order)));
     }
 
-    @PatchMapping("/{orderId}/{productId}")
+    @PatchMapping("/{id}/{productId}")
     @Operation(description = "add a product to order")
     public OrderResponseDto addProductToOrder(
-            @PathVariable Long orderId,
+            @PathVariable Long id,
             @PathVariable Long productId) {
-        return responseOrderMapper.toDto(orderService.addProduct(orderId, productId));
+        return responseOrderMapper.toDto(orderService.addProduct(id, productId));
     }
 
     @PutMapping("/{id}")

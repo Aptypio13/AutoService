@@ -8,7 +8,7 @@
         <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.mate</groupId>
+    <groupId>com.project</groupId>
     <artifactId>AutoService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AutoService</name>
